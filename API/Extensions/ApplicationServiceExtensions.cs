@@ -33,6 +33,8 @@ public static class ApplicationServiceExtensions
 
         services.AddScoped<IMessageRepository, MessageRepository>();
 
+        services.AddSignalR();
+
         return services;
     }
 }
