@@ -10,7 +10,16 @@
     <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']">
         {{label}} must be at most {{control.errors?.['maxlength'].requiredLength}} characters
     </div>
-    <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
+    <div class="invalid-feedback" *ngIf="control.errors?.['isMatching']">
         Password do not match
+    </div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['digitRequired']">
+        Password must contain a digit
+    </div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['upperCaseRequired']">
+        Password must contain a uppercase character
+    </div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['lowerCaseRequired']">
+        Password must contain a lowercase character
     </div>
 </div>

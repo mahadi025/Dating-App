@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   validationErrors: string[] | undefined;
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router) { }
+  constructor(private accountService: AccountService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.initializationForm();
@@ -33,13 +32,36 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), this.passwordValidator]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
     })
     this.registerForm.controls['password'].valueChanges.subscribe({
       next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
     })
   }
+
+  passwordValidator(control: AbstractControl) {
+    const password = control.value;
+
+    const hasDigit = /\d/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+
+    if (!hasDigit) {
+      return { digitRequired: true };
+    }
+
+    if (!hasUpperCase) {
+      return { upperCaseRequired: true };
+    }
+
+    if (!hasLowerCase) {
+      return { lowerCaseRequired: true };
+    }
+
+    return null;
+  }
+
 
   matchValues(matchTo: string): ValidatorFn {
     return (control: AbstractControl) => {
@@ -56,6 +78,7 @@ export class RegisterComponent implements OnInit {
       },
       error: error => {
         this.validationErrors = error;
+        console.log(error);
       }
     })
   }
