@@ -5,7 +5,7 @@ import { Member } from '../_models/member';
 import { map, of, take } from 'rxjs';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
-import { User } from '../_models/users';
+import { User } from '../_models/user';
 import { getPaginationHeaders, getPaginatedResult } from './paginationHelper';
 
 @Injectable({

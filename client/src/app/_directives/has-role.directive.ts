@@ -1,5 +1,5 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { User } from '../_models/users';
+import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs';
 
