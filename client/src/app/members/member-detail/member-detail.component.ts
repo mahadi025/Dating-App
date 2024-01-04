@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/_services/message.service';
 import { Message } from 'src/app/_models/message';
 import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
-import { User } from 'src/app/_models/users';
+import { User } from 'src/app/_models/user';
 import { take } from 'rxjs';
 
 @Component({
